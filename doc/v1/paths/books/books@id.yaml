@@ -1,0 +1,59 @@
+parameters:
+  - name: id
+    in: path
+    description: Book ID
+    required: true
+    schema:
+      type: integer
+      format: int64
+get:
+  tags:
+    - Books
+  summary: Get Book
+  description: Returns a Book based on a single ID
+  operationId: GetBook
+  responses:
+    '200':
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/books/book.yaml'
+    '401':
+      $ref: '../../components/errors/401_Error.yaml'
+    '403':
+      $ref: '../../components/errors/403_Error.yaml'
+    '404':
+      $ref: '../../components/errors/404_Error.yaml'
+    '500':
+      $ref: '../../components/errors/500_Error.yaml'
+    '503':
+      $ref: '../../components/errors/503_Error.yaml'
+put:
+  tags:
+    - Books
+  summary: Update Book
+  description: Update a Book based on a single ID
+  operationId: UpdateBook
+  requestBody:
+    description: Body
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/books/bookIn.yaml'
+  responses:
+    '204':
+      description: Successful operation - No content
+    '400':
+      $ref: '../../components/errors/400_Error.yaml'
+    '401':
+      $ref: '../../components/errors/401_Error.yaml'
+    '403':
+      $ref: '../../components/errors/403_Error.yaml'
+    '404':
+      $ref: '../../components/errors/404_Error.yaml'
+    '500':
+      $ref: '../../components/errors/500_Error.yaml'
+    '503':
+      $ref: '../../components/errors/503_Error.yaml'

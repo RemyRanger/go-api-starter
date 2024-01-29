@@ -1,0 +1,59 @@
+get:
+  tags:
+    - Books
+  summary: List Books
+  description: List Books with pagination.
+  operationId: ListBooks
+  parameters:
+    - $ref: '../../components/parameters/query/queryPageSize.yaml'
+    - $ref: '../../components/parameters/query/queryPageToken.yaml'
+    - $ref: '../../components/parameters/query/queryOrderBy.yaml'
+    - $ref: '../../components/parameters/query/querySortDirDesc.yaml'
+  responses:
+    '200':
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/books/paginatedBooks.yaml'
+    '400':
+      $ref: '../../components/errors/400_Error.yaml'
+    '401':
+      $ref: '../../components/errors/401_Error.yaml'
+    '403':
+      $ref: '../../components/errors/403_Error.yaml'
+    '500':
+      $ref: '../../components/errors/500_Error.yaml'
+    '503':
+      $ref: '../../components/errors/503_Error.yaml'
+
+post:
+  tags:
+    - Books
+  summary: Create Book
+  description: Create a Book in database.
+  operationId: CreateBook
+  requestBody:
+    description: Book to create
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/books/bookIn.yaml'
+  responses:
+    '201':
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/books/book.yaml'
+    '400':
+      $ref: '../../components/errors/400_Error.yaml'
+    '401':
+      $ref: '../../components/errors/401_Error.yaml'
+    '403':
+      $ref: '../../components/errors/403_Error.yaml'
+    '500':
+      $ref: '../../components/errors/500_Error.yaml'
+    '503':
+      $ref: '../../components/errors/503_Error.yaml'

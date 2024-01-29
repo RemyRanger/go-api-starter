@@ -1,0 +1,7 @@
+description: Forbidden
+content:
+  application/json:
+    schema:
+      $ref: 'ModelError.yaml'
+    example:
+      errorMessage: Forbidden

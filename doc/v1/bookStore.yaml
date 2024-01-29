@@ -1,0 +1,62 @@
+openapi: 3.0.3
+info:
+  x-logo:
+    url: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPHRvtFUvNT9Rrpz2HE4gu05hPPg8m7DweCg&usqp=CAU
+  title: API BookStore
+  description: |-
+    API BookStore
+
+    # Authentication
+
+    Token JWT (todo) - Auth is not implemented yet ..
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+  termsOfService: https://remy-ranger.raveon.fr/
+  contact:
+    name: Ranger Rémy
+    email: remy.ranger@gmail.com
+    url: https://remy-ranger.raveon.fr/
+  version: 0.1.0
+  license:
+    name: 'Rémy Ranger'
+    url: https://remy-ranger.raveon.fr/
+servers:
+  - url: 'https://api-{env}.remy-ranger.fr/v1/bookstore'
+    description: ci/staging APIs URL.
+    variables:
+      env:
+        description: environment
+        default: staging
+        enum:
+          - ci
+          - staging
+
+paths:
+  '/healthcheck':
+    $ref: ./paths/healthcheck/healthcheck.yaml
+
+  '/books':
+    $ref: ./paths/books/books.yaml
+  '/books/{id}':
+    $ref: ./paths/books/books@id.yaml
+  '/books/{id}/author':
+    $ref: ./paths/books/books@id@author.yaml
+
+  '/authors':
+    $ref: ./paths/authors/authors.yaml
+  '/authors/{id}':
+    $ref: ./paths/authors/authors@id.yaml
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
+
+externalDocs:
+  description: Documentation
+  url: https://remy-ranger.raveon.fr/

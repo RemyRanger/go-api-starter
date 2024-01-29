@@ -1,0 +1,14 @@
+type: object
+properties:
+  count:
+    type: integer
+    format: int64
+    minimum: 0
+    description: Total objects found
+    example: 18
+  books:
+    type: array
+    description: Books fetched
+    items:
+      $ref: 'book.yaml'
+    maxItems: 100

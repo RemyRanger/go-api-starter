@@ -1,0 +1,6 @@
+name: order_by
+in: query
+required: false
+description: order by field
+schema:
+  type: string
