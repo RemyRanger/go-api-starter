@@ -1,0 +1,583 @@
+openapi: 3.0.3
+info:
+  x-logo:
+    url: https://www.dawex.com/hubfs/dawex_logo.png
+  title: '[internal] Use case API'
+  version: '1.0'
+  description: |-
+    Use case API - internal
+
+    We use the API Specification to describe each endpoint. The API self-description also contains type information to help you error-check your requests.
+
+    # Authentication
+
+    Session cookie - Auth is provided by session cookie.
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+  contact:
+    name: Dawex
+    email: developer@dawex.com
+  license:
+    name: Dawex
+    url: https://www.dawex.com/
+servers:
+  - url: https://platform.dev.corp.dawex.net/api
+    description: STG APIs url.
+security:
+  - cookieAuth: []
+paths:
+  /internal/usecases:
+    get:
+      tags:
+        - Use cases internal
+      operationId: find-all
+      summary: Retrieves use cases based on filters
+      description: |
+        Retrieves all the use cases based on filters
+      parameters:
+        - $ref: '#/components/parameters/PageNumberRequestQueryParam'
+        - $ref: '#/components/parameters/PageSizeRequestQueryParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UseCasePage'
+        '400':
+          $ref: '#/components/responses/400-default'
+        '401':
+          $ref: '#/components/responses/401-default'
+        '403':
+          $ref: '#/components/responses/403-default'
+        '404':
+          $ref: '#/components/responses/404-default'
+  /internal/usecases/{usecaseId}:
+    parameters:
+      - $ref: '#/components/parameters/usecaseId'
+    get:
+      tags:
+        - Use cases internal
+      operationId: get-usecase
+      summary: Get a use case
+      description: Get the specified use case
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UseCase'
+        '400':
+          $ref: '#/components/responses/400-default'
+        '401':
+          $ref: '#/components/responses/401-default'
+        '403':
+          $ref: '#/components/responses/403-default'
+  /internal/usecases/search:
+    post:
+      tags:
+        - Use cases internal
+      operationId: search-usecases
+      summary: Search use cases based on criteria
+      description: |
+        Retrieves all the use cases based on passed criteria
+      requestBody:
+        description: The criteria to find use cases
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Criteria'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UseCase'
+        '400':
+          $ref: '#/components/responses/400-default'
+        '401':
+          $ref: '#/components/responses/401-default'
+        '403':
+          $ref: '#/components/responses/403-default'
+  /internal/usecases/attachments/{resourceType}/{resourceId}/detachAll:
+    parameters:
+      - $ref: '#/components/parameters/resourceType'
+      - $ref: '#/components/parameters/resourceId'
+    delete:
+      tags:
+        - Use cases internal
+      operationId: detach-from-all-usecases
+      summary: Detach the specified resource from all use case
+      description: |
+        This API delete all the attachments for resource
+      responses:
+        '204':
+          $ref: '#/components/responses/204-default'
+        '400':
+          $ref: '#/components/responses/400-default'
+        '401':
+          $ref: '#/components/responses/401-default'
+        '403':
+          $ref: '#/components/responses/403-default'
+  /internal/marketplace/organisations/{organisationId}/usecases:
+    parameters:
+      - $ref: '#/components/parameters/organisationIdInPath'
+      - $ref: '#/components/parameters/resourceTypeQuery'
+      - $ref: '#/components/parameters/resourceIdQuery'
+    get:
+      tags:
+        - Use cases internal
+      operationId: get-all-marketplace-usecases-of-resource
+      summary: Get all marketplace use cases of a specified resource
+      description: |
+        Get all use cases attached to the resource by providing the Id and the Type of the resource.
+        They are destined to marketplace participants as the response does not contains the whole resource.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MarketplaceUseCase'
+        '400':
+          $ref: '#/components/responses/400-default'
+        '401':
+          $ref: '#/components/responses/401-default'
+        '403':
+          $ref: '#/components/responses/403-default'
+  /internal/organisations/{organisationId}/usecases/{usecaseId}:
+    parameters:
+      - $ref: '#/components/parameters/organisationIdInPath'
+      - $ref: '#/components/parameters/usecaseId'
+    get:
+      tags:
+        - Use cases internal
+      operationId: get-organisation-usecase
+      summary: Get a use case
+      description: Get the specified use case
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UseCase'
+        '400':
+          $ref: '#/components/responses/400-default'
+        '401':
+          $ref: '#/components/responses/401-default'
+        '403':
+          $ref: '#/components/responses/403-default'
+  /internal/organisations/{organisationId}/usecases/{usecaseId}/duplicate:
+    parameters:
+      - $ref: '#/components/parameters/organisationIdInPath'
+      - $ref: '#/components/parameters/usecaseId'
+      - $ref: '#/components/parameters/actorIdQuery'
+    post:
+      tags:
+        - Use cases internal
+      operationId: duplicate-usecases
+      summary: Duplicate use cases
+      description: |
+        Duplicate all use cases and linked medias
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UseCase'
+        '400':
+          $ref: '#/components/responses/400-default'
+        '401':
+          $ref: '#/components/responses/401-default'
+        '403':
+          $ref: '#/components/responses/403-default'
+  /internal/organisations/{organisationId}/usecases/{usecaseId}/attachments:
+    parameters:
+      - $ref: '#/components/parameters/organisationIdInPath'
+      - $ref: '#/components/parameters/usecaseId'
+    post:
+      tags:
+        - Use cases internal
+      operationId: attach-resource
+      summary: Attach the specified use case to a resource
+      description: |
+        To attach an use case to a resource, the use case should hold the resource Id and type
+        This API create the attachment
+      requestBody:
+        description: An attachment composed of the id of the attached resource and its type
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UseCaseResourceAttachment'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UseCaseResourceAttachment'
+        '400':
+          $ref: '#/components/responses/400-default'
+        '401':
+          $ref: '#/components/responses/401-default'
+        '403':
+          $ref: '#/components/responses/403-default'
+        '404':
+          $ref: '#/components/responses/404-default'
+  /internal/organisations/{organisationId}/usecases/{usecaseId}/attachments/{resourceType}/{resourceId}:
+    parameters:
+      - $ref: '#/components/parameters/organisationIdInPath'
+      - $ref: '#/components/parameters/usecaseId'
+      - $ref: '#/components/parameters/resourceType'
+      - $ref: '#/components/parameters/resourceId'
+    delete:
+      tags:
+        - Use cases internal
+      operationId: detach-resource
+      summary: Detach the specified use case from a resource
+      description: |
+        To detach an use case from a resource, the use case should not hold the resource Id and type
+        This API delete the attachment
+      responses:
+        '204':
+          $ref: '#/components/responses/204-default'
+        '400':
+          $ref: '#/components/responses/400-default'
+        '401':
+          $ref: '#/components/responses/401-default'
+        '403':
+          $ref: '#/components/responses/403-default'
+        '404':
+          $ref: '#/components/responses/404-default'
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: SESSION
+  parameters:
+    PageNumberRequestQueryParam:
+      name: pageNumber
+      in: query
+      required: false
+      description: Indicates the page number part of a page that is being requested in a paginated operation.
+      schema:
+        type: integer
+        description: The zero-based index of the page that is being requested, assuming that all pages have the same size.
+        minimum: 0
+        default: 0
+    PageSizeRequestQueryParam:
+      name: pageSize
+      in: query
+      required: false
+      description: Indicates the page number part of a page that is being requested in a paginated operation.
+      schema:
+        type: integer
+        description: The page size used to calculate the item allocation into pages and which items should be returned in the requested page.
+        minimum: 1
+        default: 100
+    usecaseId:
+      name: usecaseId
+      description: The ID of a use case
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Id'
+    resourceType:
+      name: resourceType
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/UseCaseAttachedResourceType'
+    resourceId:
+      name: resourceId
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Id'
+    organisationIdInPath:
+      name: organisationId
+      description: The ID of an organisation registered on the Data Exchange Platform
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Id'
+    resourceTypeQuery:
+      name: resourceTypeQuery
+      in: query
+      required: true
+      schema:
+        $ref: '#/components/schemas/UseCaseAttachedResourceType'
+    resourceIdQuery:
+      name: resourceId
+      in: query
+      required: true
+      schema:
+        $ref: '#/components/schemas/Id'
+    actorIdQuery:
+      name: actorId
+      in: query
+      required: true
+      schema:
+        $ref: '#/components/schemas/Id'
+  schemas:
+    Id:
+      type: string
+      description: |
+        The unique ID of an object on the Data Exchange Platform.
+        IDs are generated server-side and should be treated as opaque strings by clients.
+      pattern: ^[-_0-9a-zA-Z]+$
+      minLength: 1
+      maxLength: 36
+    EnrichedText:
+      type: object
+      description: |
+        Represents a Tiptap text description for Wysiwyg text field
+        See https://www.tiptap.dev/api/schema/
+      properties:
+        type:
+          type: string
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichedText'
+        text:
+          type: string
+        marks:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    UseCaseFileAttachment:
+      type: object
+      description: |
+        A file that is attached to a use case. It contains details about the file like
+        the Id, the name or the size of the file
+      required:
+        - fileId
+        - thumbnailId
+        - name
+        - extension
+        - size
+        - description
+      properties:
+        fileId:
+          $ref: '#/components/schemas/Id'
+        thumbnailId:
+          $ref: '#/components/schemas/Id'
+        name:
+          type: string
+          description: The name of the file
+          maxLength: 100
+          minLength: 1
+          readOnly: true
+        extension:
+          type: string
+          description: The file extension
+          readOnly: true
+        size:
+          type: integer
+          description: The size of the file
+          readOnly: true
+        description:
+          type: string
+          description: The legend of the file
+          maxLength: 100
+          minLength: 1
+          readOnly: true
+    VideoProvider:
+      type: string
+      description: A video provider
+      enum:
+        - YOUTUBE
+    VideoLink:
+      type: object
+      description: The video link and the provider that host the video
+      required:
+        - videoId
+        - provider
+      properties:
+        videoId:
+          $ref: '#/components/schemas/Id'
+        provider:
+          $ref: '#/components/schemas/VideoProvider'
+    TaxonomyItemIdsByTaxonomyTypeCode:
+      type: object
+      description: |
+        Indicates the taxonomy items associated with a given resource on the Data Exchange Platform.
+        A map whose keys (property names) are taxonomy type codes and whose values are lists of taxonomy item IDs of the corresponding type.
+      additionalProperties:
+        type: array
+        items:
+          type: string
+    UseCaseCommonProperties:
+      type: object
+      description: Common properties for use case objects. Should not be used as is
+      required:
+        - id
+        - title
+        - description
+      properties:
+        id:
+          $ref: '#/components/schemas/Id'
+        title:
+          type: string
+          description: The title of this use case
+          maxLength: 100
+          minLength: 1
+          pattern: ^.*[^\s!-\/:-@\[-`{-~¡-¿×÷ʰ-˿–-⁊⁰-ₜ₠-₿℀-⅏⅐-↋←-⇿∀-⋿⌀-⏿①-⓿─-╿▀-▟■-◿☀-⛿]+.*$
+        description:
+          $ref: '#/components/schemas/EnrichedText'
+        file:
+          $ref: '#/components/schemas/UseCaseFileAttachment'
+        video:
+          $ref: '#/components/schemas/VideoLink'
+        taxonomies:
+          $ref: '#/components/schemas/TaxonomyItemIdsByTaxonomyTypeCode'
+    AuditInfo:
+      type: object
+      description: Information about when and by who this use case was created and modified for the last time
+      readOnly: true
+      required:
+        - createdById
+        - lastModifiedById
+        - createdDate
+        - lastModifiedDate
+      properties:
+        createdById:
+          $ref: '#/components/schemas/Id'
+        lastModifiedById:
+          $ref: '#/components/schemas/Id'
+        createdDate:
+          type: string
+          format: date-time
+          description: The UTC date and time of when this use case was created
+        lastModifiedDate:
+          type: string
+          format: date-time
+          description: The UTC date and time of when this use case was modified for the last time
+    UseCaseAttachedResourceType:
+      type: string
+      description: The type of resource to which a use case may be attached
+      enum:
+        - THEMATIC
+        - DATA_OFFERING
+        - SERVICE_OFFERING
+    UseCaseResourceAttachment:
+      type: object
+      description: A resource attached to an use case. Contains the ID and the type of the resource.
+      properties:
+        resourceType:
+          $ref: '#/components/schemas/UseCaseAttachedResourceType'
+        resourceId:
+          $ref: '#/components/schemas/Id'
+    UseCase:
+      type: object
+      description: |
+        A use case that can be attached to offerings (data-offering, service-offering and thematic).
+        It provides additional information/explanation on the offering it is attached to.
+        It is composed of a description and may be accompanied by a media (file, image or youtube video).
+      allOf:
+        - $ref: '#/components/schemas/UseCaseCommonProperties'
+        - $ref: '#/components/schemas/AuditInfo'
+        - type: object
+          properties:
+            attachedResources:
+              type: object
+              description: |
+                Map of all resources to which this use case is attached.
+                The map contains attached resources group by their type.
+                The type must be a UseCaseAttachedResourceType's value
+              readOnly: true
+              additionalProperties:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UseCaseResourceAttachment'
+          required:
+            - attachedResources
+    NumberedPageMetadata:
+      type: object
+      description: Describes the current page in a paginated result.
+      properties:
+        totalItems:
+          type: integer
+          format: int64
+          description: The total number of items available in all pages.
+        totalPages:
+          type: integer
+          format: int32
+          description: The total number of pages of the same size as the current page that are required to retrieve all items.
+        pageSize:
+          type: integer
+          format: int32
+          description: The size of the current page. If this is the last page, then the actual number of items in it may be smaller than the page size.
+        pageNumber:
+          type: integer
+          format: int32
+          description: The zero-based index of the current page, assuming the current page size for all pages.
+    UseCasePage:
+      type: object
+      description: Paginated list of use cases
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/UseCase'
+        page:
+          $ref: '#/components/schemas/NumberedPageMetadata'
+    Criteria:
+      type: object
+      description: Criteria to query use cases
+      properties:
+        organisationId:
+          $ref: '#/components/schemas/Id'
+        resourceType:
+          $ref: '#/components/schemas/UseCaseAttachedResourceType'
+        resourceIds:
+          type: array
+          description: |
+            The Ids of resources that should be attached to this use case.
+            If this param is used, resourceType must be set
+          items:
+            $ref: '#/components/schemas/Id'
+    MarketplaceUseCase:
+      type: object
+      description: |
+        A use case attached to offerings (data-offering, service-offering and thematic).
+        It provides additional information/explanation on the offering it is attached to.
+        It is composed of a description and may be accompanied by a media (file, image or youtube video).
+      allOf:
+        - $ref: '#/components/schemas/UseCaseCommonProperties'
+        - type: object
+          properties:
+            createdDate:
+              type: string
+              format: date-time
+              description: The UTC date and time of when this use case was created
+          required:
+            - createdDate
+  responses:
+    400-default:
+      description: |
+        Bad request. The request is malformed or contains invalid parameters in the body, URL path, URL query string, or HTTP headers.
+    401-default:
+      description: |
+        Unauthorized. The caller's authentication credentials are invalid or missing.
+    403-default:
+      description: |
+        Forbidden. The caller is not allowed to perform this operation.
+    404-default:
+      description: |
+        Not Found. The specified resource was not found.
+    204-default:
+      description: No content

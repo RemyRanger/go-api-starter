@@ -1,153 +1,79 @@
 package config
 
 import (
-	"os"
-	"path/filepath"
-	"reflect"
+	"fmt"
+	"strings"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/rs/zerolog/log"
-
-	"gopkg.in/yaml.v2"
+	"github.com/spf13/viper"
 )
 
-var Conf *Configs
-
-// Configs : struct Configs
-type Configs struct {
-	Adequation Adequation    `yaml:"adequation"`
-	Telemetry  Telemetry     `yaml:"telemetry"`
-	Es         ElasticSearch `yaml:"elasticsearch"`
-	Srv        Server        `yaml:"srv"`
-	Mysql      Mysql         `yaml:"mysql"`
-	Yanport    JWTClient     `yaml:"yanport"`
-	Cadredevie Cadredevie    `yaml:"cadredevie"`
-	Firebase   Firebase      `yaml:"firebase"`
-	Logs       Logs          `yaml:"logs"`
-	Security   Security      `yaml:"security"`
-	Mail       Mail          `yaml:"mail"`
+// Config structure to hold the configuration values
+type Config struct {
+	Server    Server    `mapstructure:"server" validate:"required"`
+	Telemetry Telemetry `mapstructure:"telemetry" validate:"required"`
+	Db        Db        `mapstructure:"db" validate:"required"`
+	Logs      Logs      `mapstructure:"logs" validate:"required"`
 }
 
-// Server : struct Server
 type Server struct {
-	Addr         string `yaml:"addr"`
-	Certificate  string `yaml:"certificate"`
-	Key          string `yaml:"key"`
-	ImageBaseURL string `yaml:"imageBaseURL"`
-	ProductID    string `yaml:"product_id"`
+	Env  string `mapstructure:"env" validate:"required,oneof=DEV PROD"`
+	Addr string `mapstructure:"addr" validate:"required"`
 }
 
-// Telemetry : struct Telemetry
 type Telemetry struct {
-	ServiceName              string `yaml:"service_name"`
-	SignozAccessToken        string `yaml:"signoz_access_token"`
-	OtelExporterOTLPEndpoint string `yaml:"otel_exporter_otlp_endpoint"`
+	Addr string `mapstructure:"addr" validate:"required"`
 }
 
-// Logs : struct Logs
+type Db struct {
+	Addr string `mapstructure:"addr" validate:"required"`
+}
+
 type Logs struct {
-	Level string `yaml:"level"`
+	Level string `mapstructure:"level" validate:"required,oneof=INFO DEBUG TRACE"`
 }
 
-// Security : struct Security
-type Security struct {
-	Secret string `yaml:"secret"`
-}
+func LoadConfig(configName string) (Config, error) {
+	// Set the name of the config file (without extension)
+	viper.SetConfigName(configName)
+	// Set the path to look for the config file
+	viper.AddConfigPath("./config/")     // config folder from current directory
+	viper.AddConfigPath("../../config/") // config folder from current directory
+	// Set the file type to YAML
+	viper.SetConfigType("yaml")
 
-// Mysql : struct Mysql
-type Mysql struct {
-	DSN  string `yaml:"dsn"`
-	DSN2 string `yaml:"dsn2"`
-}
+	// Automatic environment variables
+	viper.AutomaticEnv()
 
-// Firebase : struct Firebase
-type Firebase struct {
-	CredentialsFile string `yaml:"credentials_file"`
-}
+	// Replace `.` in env variables with `_` (ex: env var DATABASE_HOST is replaced by DATABASE.HOST to match struct config )
+	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 
-// ElasticSearch : struct ElasticSearch
-type ElasticSearch struct {
-	Addr            string `yaml:"addr"`
-	User            string `yaml:"user"`
-	Password        string `yaml:"password"`
-	ProgramsIndex   string `yaml:"programsIndex"`
-	PropertiesIndex string `yaml:"propertiesIndex"`
-}
-
-// Cadredevie : struct Cadredevie
-type Cadredevie struct {
-	RealEstate RealEstate `yaml:"realestate"`
-}
-
-// RealEstate : struct RealEstate
-type RealEstate struct {
-	BaseURL string `yaml:"base_url"`
-	Apikey  string `yaml:"apikey"`
-}
-
-// Adequation : struct Adequation
-type Adequation struct {
-	Programs       JWTClient `yaml:"programs"`
-	Attractiveness JWTClient `yaml:"attractiveness"`
-	Commerce       JWTClient `yaml:"commerce"`
-	Insee          JWTClient `yaml:"insee"`
-	Promoters      JWTClient `yaml:"promoters"`
-	DVF            DVF       `yaml:"dvf"`
-}
-
-// JWTClient : struct JWTClient
-type JWTClient struct {
-	BaseURL string `yaml:"base_url"`
-	JWT     string `yaml:"jwt"`
-}
-
-// DVF : struct DVF
-type DVF struct {
-	BaseURL  string `yaml:"base_url"`
-	DVFIndex string `yaml:"dvf_index"`
-}
-
-// Mail : struct Mail
-type Mail struct {
-	SendgridApiKey string `yaml:"sendgrid_api_key"`
-	AllowedOrigin  string `yaml:"allowed_origin"`
-	MailFrom       string `yaml:"mail_from"`
-	MailTo         string `yaml:"mail_to"`
-}
-
-// New : func new
-func New(file string) *Configs {
-	home, err := os.UserHomeDir()
-	if err != nil {
-		log.Fatal().Err(err).Msgf("Homedir error")
+	// Attempt to read the configuration file
+	if err := viper.ReadInConfig(); err != nil {
+		// If no configuration file is found, fallback to env variables
+		if viper_err, ok := err.(viper.ConfigFileNotFoundError); ok {
+			log.Warn().Msgf("%s, falling back to environment variables", viper_err.Error())
+		} else {
+			// Handle other errors
+			return Config{}, fmt.Errorf("error reading config file: %w", err)
+		}
+	} else {
+		log.Info().Msg("Config file loaded successfully")
 	}
 
-	path := filepath.Join(home, ".config", "cadredevie", file)
-
-	yamlFile, err := os.ReadFile(path)
-	if err != nil {
-		log.Fatal().Err(err).Msgf("Read config error")
+	// Unmarshal the configuration into the struct
+	var config Config
+	if err := viper.Unmarshal(&config); err != nil {
+		return Config{}, fmt.Errorf("unable to decode config: %w", err)
 	}
 
-	var cfg Configs
-	err = yaml.Unmarshal(yamlFile, &cfg)
-	if err != nil {
-		log.Fatal().Err(err).Msgf("Unmarshal config error")
+	// Validate the config
+	validate := validator.New()
+	if err := validate.Struct(config); err != nil {
+		// Return validation errors
+		return Config{}, fmt.Errorf("unable to validate config: %w", err)
 	}
 
-	return &cfg
-}
-
-// CheckRealEstate check if mandatory config is ok
-func (c *Configs) CheckRealEstate() {
-	if reflect.DeepEqual(c.Srv, Server{}) {
-		log.Fatal().Msgf("Missing server config in realestate.yaml")
-	}
-
-	if reflect.DeepEqual(c.Mysql, Mysql{}) {
-		log.Fatal().Msgf("Missing mysql config in realestate.yaml")
-	}
-
-	if reflect.DeepEqual(c.Es, ElasticSearch{}) {
-		log.Fatal().Msgf("Missing elasticsearch config in realestate.yaml")
-	}
+	return config, nil
 }

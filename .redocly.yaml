@@ -1,0 +1,14 @@
+extends:
+  - recommended
+
+apis:
+  control@v1:
+    root: doc/control.yaml
+    output: doc/dist/control.yaml
+
+  gateway@v1:
+    root: doc/gateway.yaml
+    output: doc/dist/gateway.yaml
+
+rules:
+  no-invalid-media-type-examples: off

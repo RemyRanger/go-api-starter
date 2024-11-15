@@ -1,0 +1,12 @@
+server:
+  env: 'DEV'
+  addr: '0.0.0.0:8090'
+
+db:
+  addr: 'host=127.0.0.1 user=go-api-starter password=changeme dbname=go-api-starter port=5432 sslmode=disable TimeZone=UTC'
+
+telemetry:
+  addr: '127.0.0.1:4317'
+
+logs:
+  level: 'DEBUG'

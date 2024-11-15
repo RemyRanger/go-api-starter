@@ -1,0 +1,8 @@
+name: order_by
+in: query
+required: false
+description: Order by field.
+schema:
+  type: string
+  description: Field name.
+  default: 'CreatedAt'

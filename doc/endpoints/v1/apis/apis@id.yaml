@@ -1,0 +1,87 @@
+parameters:
+  - name: api_id
+    in: path
+    description: API unique ID
+    required: true
+    schema:
+      $ref: '../../../components/parameters/id.yaml'
+
+get:
+  tags:
+    - Api
+  summary: Get API.
+  description: Get API by unique ID.
+  operationId: getApi
+  responses:
+    '200':
+      description: Operation Successful.
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/v1/api/api.yaml'
+    '400':
+      $ref: '../../../components/errors/400_Error.yaml'
+    '401':
+      $ref: '../../../components/errors/401_Error.yaml'
+    '403':
+      $ref: '../../../components/errors/403_Error.yaml'
+    '404':
+      $ref: '../../../components/errors/404_Error.yaml'
+    '500':
+      $ref: '../../../components/errors/500_Error.yaml'
+    '503':
+      $ref: '../../../components/errors/503_Error.yaml'
+
+put:
+  tags:
+    - Api
+  summary: Update API.
+  description: Update API fields.
+  operationId: updateApi
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/v1/api/api-in.yaml'
+  responses:
+    '200':
+      description: Resource updated.
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/v1/api/api.yaml'
+    '400':
+      $ref: '../../../components/errors/400_Error.yaml'
+    '401':
+      $ref: '../../../components/errors/401_Error.yaml'
+    '403':
+      $ref: '../../../components/errors/403_Error.yaml'
+    '404':
+      $ref: '../../../components/errors/404_Error.yaml'
+    '500':
+      $ref: '../../../components/errors/500_Error.yaml'
+    '503':
+      $ref: '../../../components/errors/503_Error.yaml'
+
+delete:
+  tags:
+    - Api
+  summary: Delete API.
+  description: Soft delete API.
+  operationId: deleteApi
+  responses:
+    '204':
+      description: Resource deleted.
+    '400':
+      $ref: '../../../components/errors/400_Error.yaml'
+    '401':
+      $ref: '../../../components/errors/401_Error.yaml'
+    '403':
+      $ref: '../../../components/errors/403_Error.yaml'
+    '404':
+      $ref: '../../../components/errors/404_Error.yaml'
+    '500':
+      $ref: '../../../components/errors/500_Error.yaml'
+    '503':
+      $ref: '../../../components/errors/503_Error.yaml'

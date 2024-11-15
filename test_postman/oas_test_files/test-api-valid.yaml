@@ -1,0 +1,58 @@
+openapi: 3.0.3
+info:
+  title: API Beeceptor
+  description: |-
+    API Beeceptor
+  version: 0.1.0
+  contact:
+    email: remy.ranger@gmail.com
+servers:
+  - url: "https://go-api-starter.free.beeceptor.com"
+security:
+  - bearerAuth: []
+externalDocs:
+  description: Documentation
+  url: https://example-documentation.com/
+paths:
+  /internal/ressources:
+    get:
+      tags:
+        - Ressource
+      operationId: getRessource
+      summary: Get Ressource
+      description: Get Ressource.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/oasEntity'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    oasEntity:
+      type: object
+      required:
+        - uuid
+        - oas_version
+        - created_at
+      properties:
+        uuid:
+          description: Unique ID
+          type: string
+          minLength: 36
+          maxLength: 36
+          example: 7b7453dc-3a2c-11eb-adc1-0242ac120555
+        oas_version:
+          description: OAS file version
+          type: string
+          example: 3.0.3
+        created_at:
+          type: string
+          format: date-time
+          description: Created date

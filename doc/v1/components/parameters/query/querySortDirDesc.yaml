@@ -1,6 +1,0 @@
-name: sort_dir_desc
-in: query
-required: false
-description: is sorting desc
-schema:
-  type: boolean

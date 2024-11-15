@@ -1,0 +1,15 @@
+{
+  "go.lintOnSave": "workspace",
+  "go.formatTool": "goimports",
+  "go.useLanguageServer": true,
+  "gopls": {
+    "analyses": { "fieldalignment": true }
+  },
+	"go.delveConfig": {
+    "debugAdapter": "dlv-dap",
+    "dlvFlags": ["--only-same-user=false"],
+	},
+  "workbench.editor.highlightModifiedTabs": true,
+  "yaml.format.singleQuote": true,
+  "makefile.configureOnOpen": false
+}

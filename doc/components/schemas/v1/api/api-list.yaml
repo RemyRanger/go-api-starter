@@ -1,0 +1,12 @@
+type: object
+required:
+  - page
+  - elems
+properties:
+  page:
+    $ref: '../shared/page.yaml'
+  elems:
+    type: array
+    items:
+      $ref: 'api.yaml'
+    maxItems: 100

@@ -1,0 +1,12 @@
+name: page_size
+in: query
+required: false
+description: Page size.
+schema:
+  type: integer
+  format: int64
+  default: 10
+  minimum: 1
+  maximum: 100
+x-oapi-codegen-extra-tags:
+  validate: 'omitempty,gte=1,lte=100'

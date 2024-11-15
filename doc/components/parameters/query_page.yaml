@@ -1,0 +1,11 @@
+name: page
+in: query
+required: false
+description: Page position.
+schema:
+  type: integer
+  format: int64
+  default: 1
+  minimum: 1
+x-oapi-codegen-extra-tags:
+  validate: 'omitempty,gte=1'

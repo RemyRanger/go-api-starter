@@ -1,0 +1,11 @@
+type: object
+description: OAS model.
+required: 
+  - ID
+  - status
+allOf:
+  - properties:
+      ID:
+        $ref: '../../../parameters/id.yaml'
+  - $ref: '../shared/audit.yaml'
+  - $ref: 'oas-in.yaml'

@@ -1,0 +1,38 @@
+openapi: '3.0.3'
+info:
+  title: 'Gateway API'
+  version: '1.0'
+  description: |-
+    Gateway API
+
+    We use the API Specification to describe each endpoint. The API self-description also contains type information to help you error-check your requests.
+
+    # Authentication
+
+    Bearer token - Auth is provided by bearer token. Tokens are managed on platform interface. 
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+  contact:
+    name: Developers Contact
+    email: developers@go-api-starter.com
+  license:
+    name: 'private-license'
+    url: 'https://go-api-starter.com/cgu'
+
+servers:
+  - url: 'https://go-api-starter.com/gateway/v1'
+    description: API base url.
+
+paths:
+  '/healthcheck':
+    $ref: endpoints/healthcheck/healthcheck.yaml
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []

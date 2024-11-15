@@ -1,0 +1,43 @@
+parameters:
+  - name: api_id
+    in: path
+    description: API unique ID
+    required: true
+    schema:
+      $ref: '../../../components/parameters/id.yaml'
+
+post:
+  tags:
+    - Oas
+  summary: Upload Oas file.
+  description: Upload Oas file and create oas object linked with API Id.
+  operationId: uploadOas
+  requestBody:
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          required: [oas]
+          properties:
+            oas:
+              type: string
+              format: binary
+  responses:
+    '201':
+      description: Created.
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/v1/oas/oas.yaml'
+    '400':
+      $ref: '../../../components/errors/400_Error.yaml'
+    '401':
+      $ref: '../../../components/errors/401_Error.yaml'
+    '403':
+      $ref: '../../../components/errors/403_Error.yaml'
+    '404':
+      $ref: '../../../components/errors/404_Error.yaml'
+    '500':
+      $ref: '../../../components/errors/500_Error.yaml'
+    '503':
+      $ref: '../../../components/errors/503_Error.yaml'

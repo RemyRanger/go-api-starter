@@ -1,0 +1,7 @@
+name: sort_desc
+in: query
+required: false
+description: Is sorting desc (sorted on created date by default).
+schema:
+  type: boolean
+  default: false

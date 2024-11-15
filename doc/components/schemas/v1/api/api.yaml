@@ -1,0 +1,12 @@
+type: object
+description: API model.
+required: 
+  -  ID
+allOf:
+  - properties:
+      ID:
+        $ref: '../../../parameters/id.yaml'
+      active_oas_id:
+        $ref: '../../../parameters/id.yaml'
+  - $ref: '../shared/audit.yaml'
+  - $ref: 'api-in.yaml'

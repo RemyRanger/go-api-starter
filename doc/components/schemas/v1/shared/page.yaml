@@ -1,0 +1,21 @@
+type: object
+required:
+  - total
+  - page
+  - page_size
+properties:
+  total:
+    type: integer
+    format: int64
+    description: Total elements found.
+    example: 68
+  page:
+    type: integer
+    format: int64
+    description: Page position.
+    example: 1
+  page_size:
+    type: integer
+    format: int64
+    description: Page size.
+    example: 10

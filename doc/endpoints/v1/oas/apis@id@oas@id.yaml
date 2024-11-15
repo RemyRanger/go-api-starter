@@ -1,0 +1,61 @@
+parameters:
+  - name: api_id
+    in: path
+    description: API unique ID
+    required: true
+    schema:
+      $ref: '../../../components/parameters/id.yaml'
+  - name: oas_id
+    in: path
+    description: Oas unique ID
+    required: true
+    schema:
+      $ref: '../../../components/parameters/id.yaml'
+
+get:
+  tags:
+    - Oas
+  summary: Get Oas.
+  description: Get Oas by unique ID.
+  operationId: getOas
+  responses:
+    '200':
+      description: Operation Successful.
+      content:
+        application/json:
+          schema:
+            $ref: '../../../components/schemas/v1/oas/oas.yaml'
+    '400':
+      $ref: '../../../components/errors/400_Error.yaml'
+    '401':
+      $ref: '../../../components/errors/401_Error.yaml'
+    '403':
+      $ref: '../../../components/errors/403_Error.yaml'
+    '404':
+      $ref: '../../../components/errors/404_Error.yaml'
+    '500':
+      $ref: '../../../components/errors/500_Error.yaml'
+    '503':
+      $ref: '../../../components/errors/503_Error.yaml'
+
+delete:
+  tags:
+    - Oas
+  summary: Delete Oas.
+  description: Soft delete Oas.
+  operationId: deleteOas
+  responses:
+    '204':
+      description: Resource deleted.
+    '400':
+      $ref: '../../../components/errors/400_Error.yaml'
+    '401':
+      $ref: '../../../components/errors/401_Error.yaml'
+    '403':
+      $ref: '../../../components/errors/403_Error.yaml'
+    '404':
+      $ref: '../../../components/errors/404_Error.yaml'
+    '500':
+      $ref: '../../../components/errors/500_Error.yaml'
+    '503':
+      $ref: '../../../components/errors/503_Error.yaml'

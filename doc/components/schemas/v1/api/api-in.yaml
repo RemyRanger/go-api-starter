@@ -1,0 +1,59 @@
+type: object
+description: API request model.
+required:
+  - title
+  - version
+  - base_url
+  - gateway_mode
+  - status
+properties:
+  title:
+    type: string
+    maxLength: 256
+    description: API title.
+    example: Hello world API
+    x-oapi-codegen-extra-tags:
+      validate: 'required,lte=256'
+  description:
+    type: string
+    maxLength: 1024
+    description: API description.
+    example: The purpose of this API is jsut to say 'Hello World'.
+    x-oapi-codegen-extra-tags:
+      validate: 'omitempty,lte=1024'
+  version:
+    type: string
+    maxLength: 32
+    description: API version.
+    example: v1.0.0
+    x-oapi-codegen-extra-tags:
+      validate: 'required,lte=32'
+  base_url:
+    type: string
+    maxLength: 1024
+    description: API base url.
+    example: 'https://base-url.com/api/'
+    x-oapi-codegen-extra-tags:
+      validate: 'required,lte=1024,url'
+  gateway_mode:
+    type: string
+    description: |-
+      Gateway transfer mode :
+        - DOMAIN : redirect all incoming requests,
+        - URL : redirect incoming requests according to paths in linked OAS document,
+        - STRICT : redirect only requests validated with linked OAS document (valdiate all informations such as parameters, paths, headers, ..). Most secured.
+    enum:
+      - DOMAIN
+      - URL
+      - STRICT
+    x-oapi-codegen-extra-tags:
+      validate: 'required,oneof=DOMAIN URL STRICT'
+  status:
+    type: string
+    description: Status of the API.
+    enum:
+      - ENABLE
+      - DISABLE
+      - DELETED
+    x-oapi-codegen-extra-tags:
+      validate: 'required,oneof=ENABLE DISABLE DELETED'
