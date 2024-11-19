@@ -1,48 +1,89 @@
-# Go-api-starter
 
-# Run database, otel-collector, grafana with docker compose
+# Go-api-starter - Microservices Monorepo Example with Golang
 
-```bash
-make docker_compose_up
-```
+This repository provides an example of a **microservices architecture** implemented in **Golang**, following a **monorepo structure**. It demonstrates the use of **OpenAPI specifications** to generate service interfaces and adheres to the principles of **hexagonal architecture (ports and adapters)** for clean, maintainable, and scalable code.
 
-Clear running docker-compose. Datas will be cleared.
+## Features
 
-```bash
-make docker_compose_down
-```
+- **Monorepo Architecture**: A single repository to manage multiple microservices, shared libraries, and common tools.
+- **Hexagonal Architecture**: Ensures separation of concerns by decoupling business logic from external dependencies like databases or APIs.
+- **OpenAPI Integration**: Automatically generates service interfaces and client code from OpenAPI specifications, reducing boilerplate and ensuring consistency.
+- **Golang Implementation**: Focused on performance, simplicity, and a strong type system.
+- **Scalable Design**: Ready for production-grade enhancements such as observability, distributed tracing, and more.
 
-# Install Go modules
+## Installation
 
-```bash
-make install
-```
+### Prerequisites
 
-# Generate APIs interfaces from oas
+- Go (v1.23 or later)
+- Docker (optional, for running services in containers)
+- NPX for OpenAPI Generator CLI (for generating code)
 
-```bash
-make generate_oas
-```
+### Steps
 
-# Run
+1. Run database, otel-collector, grafana with docker compose:
+    ```bash
+    make docker_compose_up
+    ```
 
-```bash
-make run_control
-make run_gateway
-```
+2. Install Go modules:
+    ```bash
+    make install
+    ```
 
-# Build all binaries
+3. Generate APIs interfaces from oas:
+    ```bash
+    make generate_oas
+    ```
 
-```bash
-make build
-```
+4. Run services:
+    ```bash
+    make run_control
+    make run_gateway
+    ```
 
-# Update and lint Go dependencies
+5. Build all binaries:
+    ```bash
+    make build
+    ```
 
-```bash
-make update_deps
-```
+6. Update and lint Go dependencies:
+    ```bash
+    make update_deps
+    ```
 
-# Grafana Dashboard
+6. Run test and see coverage in html:
+    ```bash
+    make test
+    make test_with_coverage
+    ```
 
-see : http://127.0.0.1:3000/grafana/dashboards
+7. Check telemetry from Grafana:  http://127.0.0.1:3000/grafana/dashboards
+
+---
+
+## Design Principles
+
+### Hexagonal Architecture
+
+The project follows the ports and adapters pattern:
+
+- **Ports**: Interfaces that define the behavior required by the application (e.g., repositories, external APIs).
+- **Adapters**: Implementations of the ports, such as database drivers or HTTP clients.
+- **Core Domain**: Business logic is isolated and does not depend on the adapters.
+
+This ensures testability, flexibility, and the ability to swap out dependencies with minimal impact.
+
+---
+
+### Code Generation with OpenAPI
+
+The OpenAPI Generator is used to:
+
+- Create server interfaces for microservices.
+- Generate strongly-typed interfaces for inter-service communication.
+- Maintain consistency across services.
+
+OAS files can be customized doc/ directory.
+
+---

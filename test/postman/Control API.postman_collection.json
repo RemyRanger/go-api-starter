@@ -1,0 +1,4280 @@
+{
+	"info": {
+		"_postman_id": "976ca9be-878a-4975-9878-416578189d5e",
+		"name": "Control API",
+		"description": "Spacia-X Connector - Control API\n\nWe use the API Specification to describe each endpoint. The API self-description also contains type information to help you error-check your requests.\n\n# Authentication\n\nBearer token - Auth is provided by bearer token. Tokens are managed on platform interface. \n\n<!-- ReDoc-Inject: <security-definitions> -->\n\nContact Support:\n Name: Developers Contact\n Email: developers@spacia-x.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8928857"
+	},
+	"item": [
+		{
+			"name": "healthcheck",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8090/healthcheck",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"healthcheck"
+							]
+						},
+						"description": "The healthcheck endpoint retrieve 200 code if service is up."
+					},
+					"response": [
+						{
+							"name": "Successful operation.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/healthcheck",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"healthcheck"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/healthcheck",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"healthcheck"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						},
+						{
+							"name": "Service Unavailable",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/healthcheck",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"healthcheck"
+									]
+								}
+							},
+							"status": "Service Unavailable",
+							"code": 503,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "apis",
+			"item": [
+				{
+					"name": "{api_id}",
+					"item": [
+						{
+							"name": "Get API.",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis/:api_id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis",
+										":api_id"
+									],
+									"variable": [
+										{
+											"key": "api_id",
+											"value": "{{api_id}}",
+											"description": "(Required) API unique ID"
+										}
+									]
+								},
+								"description": "Get API by unique ID."
+							},
+							"response": [
+								{
+									"name": "Operation Successful.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"ID\": \"D6VCAhIq6ozD6VCAhIq6ozD6VCAhIq6ozD6V\",\n  \"base_url\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"gateway_mode\": \"URL\",\n  \"status\": \"DELETED\",\n  \"title\": \"<string>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<string>\",\n  \"active_oas_id\": \"ZNRz5BG0fwZNRz5BG0fwZNRz5BG0fwZNRz5B\",\n  \"description\": \"<string>\"\n}"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Service Unavailable",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Service Unavailable",
+									"code": 503,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Update API.",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"My first API\",\n  \"version\": \"v1.0.0\",\n  \"base_url\": \"https://test.free.beeceptor.com\",\n  \"gateway_mode\": \"STRICT\",\n  \"status\": \"DISABLE\",\n  \"description\": \"test test test !\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/apis/:api_id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis",
+										":api_id"
+									],
+									"variable": [
+										{
+											"key": "api_id",
+											"value": "{{api_id}}",
+											"description": "(Required) API unique ID"
+										}
+									]
+								},
+								"description": "Update API fields."
+							},
+							"response": [
+								{
+									"name": "Resource updated.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"<string>\",\n  \"version\": \"<string>\",\n  \"base_url\": \"<string>\",\n  \"gateway_mode\": \"URL\",\n  \"status\": \"DELETED\",\n  \"description\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"ID\": \"D6VCAhIq6ozD6VCAhIq6ozD6VCAhIq6ozD6V\",\n  \"base_url\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"gateway_mode\": \"URL\",\n  \"status\": \"DELETED\",\n  \"title\": \"<string>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<string>\",\n  \"active_oas_id\": \"ZNRz5BG0fwZNRz5BG0fwZNRz5BG0fwZNRz5B\",\n  \"description\": \"<string>\"\n}"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"<string>\",\n  \"version\": \"<string>\",\n  \"base_url\": \"<string>\",\n  \"gateway_mode\": \"URL\",\n  \"status\": \"DELETED\",\n  \"description\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"<string>\",\n  \"version\": \"<string>\",\n  \"base_url\": \"<string>\",\n  \"gateway_mode\": \"URL\",\n  \"status\": \"DELETED\",\n  \"description\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"<string>\",\n  \"version\": \"<string>\",\n  \"base_url\": \"<string>\",\n  \"gateway_mode\": \"URL\",\n  \"status\": \"DELETED\",\n  \"description\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"<string>\",\n  \"version\": \"<string>\",\n  \"base_url\": \"<string>\",\n  \"gateway_mode\": \"URL\",\n  \"status\": \"DELETED\",\n  \"description\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"<string>\",\n  \"version\": \"<string>\",\n  \"base_url\": \"<string>\",\n  \"gateway_mode\": \"URL\",\n  \"status\": \"DELETED\",\n  \"description\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Service Unavailable",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"<string>\",\n  \"version\": \"<string>\",\n  \"base_url\": \"<string>\",\n  \"gateway_mode\": \"URL\",\n  \"status\": \"DELETED\",\n  \"description\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Service Unavailable",
+									"code": 503,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete API.",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis/:api_id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis",
+										":api_id"
+									],
+									"variable": [
+										{
+											"key": "api_id",
+											"value": "{{api_id}}",
+											"description": "(Required) API unique ID"
+										}
+									]
+								},
+								"description": "Soft delete API."
+							},
+							"response": [
+								{
+									"name": "Resource deleted.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Service Unavailable",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Service Unavailable",
+									"code": 503,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Find APIs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/apis?page=1&page_size=10&order_by=created_at&sort_desc=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"apis"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page position."
+								},
+								{
+									"key": "page_size",
+									"value": "10",
+									"description": "Page size."
+								},
+								{
+									"key": "order_by",
+									"value": "created_at",
+									"description": "Order by field."
+								},
+								{
+									"key": "sort_desc",
+									"value": "false",
+									"description": "Is sorting desc."
+								}
+							]
+						},
+						"description": "Find all APIs by criteria with pagination."
+					},
+					"response": [
+						{
+							"name": "Successful operation.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis?page=1&page_size=10&order_by=CreatedAt&sort_desc=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page position."
+										},
+										{
+											"key": "page_size",
+											"value": "10",
+											"description": "Page size."
+										},
+										{
+											"key": "order_by",
+											"value": "CreatedAt",
+											"description": "Order by field."
+										},
+										{
+											"key": "sort_desc",
+											"value": "false",
+											"description": "Is sorting desc."
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"page\": {\n    \"total\": \"<long>\",\n    \"page\": \"<long>\",\n    \"page_size\": \"<long>\"\n  },\n  \"elems\": [\n    {\n      \"ID\": \"MX1hzMMX1hzMMX1hzMMX1hzMMX1hzMMX1hzM\",\n      \"base_url\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"gateway_mode\": \"STRICT\",\n      \"status\": \"DELETED\",\n      \"title\": \"<string>\",\n      \"updated_at\": \"<dateTime>\",\n      \"version\": \"<string>\",\n      \"active_oas_id\": \"NwgwnNwgwnNwgwnNwgwnNwgwnNwgwnNwgwnN\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"ID\": \"MTmbGNuTtMTmbGNuTtMTmbGNuTtMTmbGNuTt\",\n      \"base_url\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"gateway_mode\": \"STRICT\",\n      \"status\": \"DELETED\",\n      \"title\": \"<string>\",\n      \"updated_at\": \"<dateTime>\",\n      \"version\": \"<string>\",\n      \"active_oas_id\": \"QfW2QfW2QfW2QfW2QfW2QfW2QfW2QfW2QfW2\",\n      \"description\": \"<string>\"\n    }\n  ]\n}"
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis?page=1&page_size=10&order_by=CreatedAt&sort_desc=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page position."
+										},
+										{
+											"key": "page_size",
+											"value": "10",
+											"description": "Page size."
+										},
+										{
+											"key": "order_by",
+											"value": "CreatedAt",
+											"description": "Order by field."
+										},
+										{
+											"key": "sort_desc",
+											"value": "false",
+											"description": "Is sorting desc."
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis?page=1&page_size=10&order_by=CreatedAt&sort_desc=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page position."
+										},
+										{
+											"key": "page_size",
+											"value": "10",
+											"description": "Page size."
+										},
+										{
+											"key": "order_by",
+											"value": "CreatedAt",
+											"description": "Order by field."
+										},
+										{
+											"key": "sort_desc",
+											"value": "false",
+											"description": "Is sorting desc."
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis?page=1&page_size=10&order_by=CreatedAt&sort_desc=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page position."
+										},
+										{
+											"key": "page_size",
+											"value": "10",
+											"description": "Page size."
+										},
+										{
+											"key": "order_by",
+											"value": "CreatedAt",
+											"description": "Order by field."
+										},
+										{
+											"key": "sort_desc",
+											"value": "false",
+											"description": "Is sorting desc."
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis?page=1&page_size=10&order_by=CreatedAt&sort_desc=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page position."
+										},
+										{
+											"key": "page_size",
+											"value": "10",
+											"description": "Page size."
+										},
+										{
+											"key": "order_by",
+											"value": "CreatedAt",
+											"description": "Order by field."
+										},
+										{
+											"key": "sort_desc",
+											"value": "false",
+											"description": "Is sorting desc."
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis?page=1&page_size=10&order_by=CreatedAt&sort_desc=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page position."
+										},
+										{
+											"key": "page_size",
+											"value": "10",
+											"description": "Page size."
+										},
+										{
+											"key": "order_by",
+											"value": "CreatedAt",
+											"description": "Order by field."
+										},
+										{
+											"key": "sort_desc",
+											"value": "false",
+											"description": "Is sorting desc."
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						},
+						{
+							"name": "Service Unavailable",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis?page=1&page_size=10&order_by=CreatedAt&sort_desc=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page position."
+										},
+										{
+											"key": "page_size",
+											"value": "10",
+											"description": "Page size."
+										},
+										{
+											"key": "order_by",
+											"value": "CreatedAt",
+											"description": "Order by field."
+										},
+										{
+											"key": "sort_desc",
+											"value": "false",
+											"description": "Is sorting desc."
+										}
+									]
+								}
+							},
+							"status": "Service Unavailable",
+							"code": 503,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create API",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"An API id is returned\", () => {",
+									"    pm.expect(pm.response.json()).to.have.property('ID')",
+									"    pm.expect(pm.response.json().ID).to.be.a('string')",
+									"    pm.collectionVariables.set('api_id', pm.response.json().ID)",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"My first API\",\n  \"version\": \"v1.0.0\",\n  \"base_url\": \"https://test.free.beeceptor.com\",\n  \"gateway_mode\": \"STRICT\",\n  \"status\": \"ENABLE\",\n  \"description\": \"test test test !\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/apis",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"apis"
+							]
+						},
+						"description": "Create one API."
+					},
+					"response": [
+						{
+							"name": "Created.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"<string>\",\n  \"version\": \"<string>\",\n  \"base_url\": \"<string>\",\n  \"gateway_mode\": \"URL\",\n  \"status\": \"DELETED\",\n  \"description\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/apis",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"ID\": \"D6VCAhIq6ozD6VCAhIq6ozD6VCAhIq6ozD6V\",\n  \"base_url\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"gateway_mode\": \"URL\",\n  \"status\": \"DELETED\",\n  \"title\": \"<string>\",\n  \"updated_at\": \"<dateTime>\",\n  \"version\": \"<string>\",\n  \"active_oas_id\": \"ZNRz5BG0fwZNRz5BG0fwZNRz5BG0fwZNRz5B\",\n  \"description\": \"<string>\"\n}"
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"<string>\",\n  \"version\": \"<string>\",\n  \"base_url\": \"<string>\",\n  \"gateway_mode\": \"URL\",\n  \"status\": \"DELETED\",\n  \"description\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/apis",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"<string>\",\n  \"version\": \"<string>\",\n  \"base_url\": \"<string>\",\n  \"gateway_mode\": \"URL\",\n  \"status\": \"DELETED\",\n  \"description\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/apis",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"<string>\",\n  \"version\": \"<string>\",\n  \"base_url\": \"<string>\",\n  \"gateway_mode\": \"URL\",\n  \"status\": \"DELETED\",\n  \"description\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/apis",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"<string>\",\n  \"version\": \"<string>\",\n  \"base_url\": \"<string>\",\n  \"gateway_mode\": \"URL\",\n  \"status\": \"DELETED\",\n  \"description\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/apis",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						},
+						{
+							"name": "Service Unavailable",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"<string>\",\n  \"version\": \"<string>\",\n  \"base_url\": \"<string>\",\n  \"gateway_mode\": \"URL\",\n  \"status\": \"DELETED\",\n  \"description\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/apis",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis"
+									]
+								}
+							},
+							"status": "Service Unavailable",
+							"code": 503,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "oas",
+			"item": [
+				{
+					"name": "_upload",
+					"item": [
+						{
+							"name": "Upload Oas file.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"An OAS id is returned\", () => {",
+											"    pm.expect(pm.response.json()).to.have.property('ID')",
+											"    pm.expect(pm.response.json().ID).to.be.a('string')",
+											"    pm.collectionVariables.set('oas_id', pm.response.json().ID)",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "oas",
+											"description": "(Required) ",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/apis/:api_id/oas/_upload",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis",
+										":api_id",
+										"oas",
+										"_upload"
+									],
+									"variable": [
+										{
+											"key": "api_id",
+											"value": "{{api_id}}",
+											"description": "(Required) API unique ID"
+										}
+									]
+								},
+								"description": "Upload Oas file and create oas object linked with API Id."
+							},
+							"response": [
+								{
+									"name": "Created.",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "oas",
+													"value": "<string>",
+													"description": "(Required) ",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/_upload",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												"_upload"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"ID\": \"R7LuFR7LuFR7LuFR7LuFR7LuFR7LuFR7LuFR\",\n  \"api_version\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"openapi_version\": \"<string>\",\n  \"updated_at\": \"<dateTime>\",\n  \"status\": -37803047\n}"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "oas",
+													"value": "<string>",
+													"description": "(Required) ",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/_upload",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												"_upload"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "oas",
+													"value": "<string>",
+													"description": "(Required) ",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/_upload",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												"_upload"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "oas",
+													"value": "<string>",
+													"description": "(Required) ",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/_upload",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												"_upload"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "oas",
+													"value": "<string>",
+													"description": "(Required) ",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/_upload",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												"_upload"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "oas",
+													"value": "<string>",
+													"description": "(Required) ",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/_upload",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												"_upload"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Service Unavailable",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "oas",
+													"value": "<string>",
+													"description": "(Required) ",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/_upload",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												"_upload"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												}
+											]
+										}
+									},
+									"status": "Service Unavailable",
+									"code": 503,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "{oas_id}",
+					"item": [
+						{
+							"name": "_download",
+							"item": [
+								{
+									"name": "Download Oas file.",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "multipart/form-data"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id/_download",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												":oas_id",
+												"_download"
+											],
+											"variable": [
+												{
+													"key": "api_id",
+													"value": "XaiF6XaiF6XaiF6XaiF6XaiF6XaiF6XaiF6X",
+													"description": "(Required) API unique ID"
+												},
+												{
+													"key": "oas_id",
+													"value": "XaiF6XaiF6XaiF6XaiF6XaiF6XaiF6XaiF6X",
+													"description": "(Required) Oas unique ID"
+												}
+											]
+										},
+										"description": "Download Oas file linked with API Id."
+									},
+									"response": [
+										{
+											"name": "Successful operation",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "multipart/form-data"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id/_download",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"apis",
+														":api_id",
+														"oas",
+														":oas_id",
+														"_download"
+													],
+													"variable": [
+														{
+															"key": "api_id"
+														},
+														{
+															"key": "oas_id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "multipart/form-data"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"oas\": \"<string>\"\n}"
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id/_download",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"apis",
+														":api_id",
+														"oas",
+														":oas_id",
+														"_download"
+													],
+													"variable": [
+														{
+															"key": "api_id"
+														},
+														{
+															"key": "oas_id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+										},
+										{
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id/_download",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"apis",
+														":api_id",
+														"oas",
+														":oas_id",
+														"_download"
+													],
+													"variable": [
+														{
+															"key": "api_id"
+														},
+														{
+															"key": "oas_id"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+										},
+										{
+											"name": "Forbidden",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id/_download",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"apis",
+														":api_id",
+														"oas",
+														":oas_id",
+														"_download"
+													],
+													"variable": [
+														{
+															"key": "api_id"
+														},
+														{
+															"key": "oas_id"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id/_download",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"apis",
+														":api_id",
+														"oas",
+														":oas_id",
+														"_download"
+													],
+													"variable": [
+														{
+															"key": "api_id"
+														},
+														{
+															"key": "oas_id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id/_download",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"apis",
+														":api_id",
+														"oas",
+														":oas_id",
+														"_download"
+													],
+													"variable": [
+														{
+															"key": "api_id"
+														},
+														{
+															"key": "oas_id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+										},
+										{
+											"name": "Service Unavailable",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id/_download",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"apis",
+														":api_id",
+														"oas",
+														":oas_id",
+														"_download"
+													],
+													"variable": [
+														{
+															"key": "api_id"
+														},
+														{
+															"key": "oas_id"
+														}
+													]
+												}
+											},
+											"status": "Service Unavailable",
+											"code": 503,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get Oas.",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis",
+										":api_id",
+										"oas",
+										":oas_id"
+									],
+									"variable": [
+										{
+											"key": "api_id",
+											"value": "{{api_id}}",
+											"description": "(Required) API unique ID"
+										},
+										{
+											"key": "oas_id",
+											"value": "{{oas_id}}",
+											"description": "(Required) Oas unique ID"
+										}
+									]
+								},
+								"description": "Get Oas by unique ID."
+							},
+							"response": [
+								{
+									"name": "Operation Successful.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												":oas_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												},
+												{
+													"key": "oas_id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"ID\": \"R7LuFR7LuFR7LuFR7LuFR7LuFR7LuFR7LuFR\",\n  \"api_version\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"openapi_version\": \"<string>\",\n  \"updated_at\": \"<dateTime>\",\n  \"status\": -37803047\n}"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												":oas_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												},
+												{
+													"key": "oas_id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												":oas_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												},
+												{
+													"key": "oas_id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												":oas_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												},
+												{
+													"key": "oas_id"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												":oas_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												},
+												{
+													"key": "oas_id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												":oas_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												},
+												{
+													"key": "oas_id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Service Unavailable",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												":oas_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												},
+												{
+													"key": "oas_id"
+												}
+											]
+										}
+									},
+									"status": "Service Unavailable",
+									"code": 503,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete Oas.",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis",
+										":api_id",
+										"oas",
+										":oas_id"
+									],
+									"variable": [
+										{
+											"key": "api_id",
+											"value": "{{api_id}}",
+											"description": "(Required) API unique ID"
+										},
+										{
+											"key": "oas_id",
+											"value": "{{oas_id}}",
+											"description": "(Required) Oas unique ID"
+										}
+									]
+								},
+								"description": "Soft delete Oas."
+							},
+							"response": [
+								{
+									"name": "Resource deleted.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												":oas_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												},
+												{
+													"key": "oas_id"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												":oas_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												},
+												{
+													"key": "oas_id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												":oas_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												},
+												{
+													"key": "oas_id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												":oas_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												},
+												{
+													"key": "oas_id"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												":oas_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												},
+												{
+													"key": "oas_id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												":oas_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												},
+												{
+													"key": "oas_id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								},
+								{
+									"name": "Service Unavailable",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/apis/:api_id/oas/:oas_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"apis",
+												":api_id",
+												"oas",
+												":oas_id"
+											],
+											"variable": [
+												{
+													"key": "api_id"
+												},
+												{
+													"key": "oas_id"
+												}
+											]
+										}
+									},
+									"status": "Service Unavailable",
+									"code": 503,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Find Oas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/apis/:api_id/oas?page=1&page_size=10&order_by=created_at&sort_desc=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"apis",
+								":api_id",
+								"oas"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page position."
+								},
+								{
+									"key": "page_size",
+									"value": "10",
+									"description": "Page size."
+								},
+								{
+									"key": "order_by",
+									"value": "created_at",
+									"description": "Order by field."
+								},
+								{
+									"key": "sort_desc",
+									"value": "false",
+									"description": "Is sorting desc."
+								}
+							],
+							"variable": [
+								{
+									"key": "api_id",
+									"value": "{{api_id}}",
+									"description": "(Required) API unique ID"
+								}
+							]
+						},
+						"description": "Find all Oas by criteria with pagination."
+					},
+					"response": [
+						{
+							"name": "Successful operation.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis/:api_id/oas?page=1&page_size=10&order_by=CreatedAt&sort_desc=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis",
+										":api_id",
+										"oas"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page position."
+										},
+										{
+											"key": "page_size",
+											"value": "10",
+											"description": "Page size."
+										},
+										{
+											"key": "order_by",
+											"value": "CreatedAt",
+											"description": "Order by field."
+										},
+										{
+											"key": "sort_desc",
+											"value": "false",
+											"description": "Is sorting desc."
+										}
+									],
+									"variable": [
+										{
+											"key": "api_id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"page\": {\n    \"total\": \"<long>\",\n    \"page\": \"<long>\",\n    \"page_size\": \"<long>\"\n  },\n  \"elems\": [\n    {\n      \"ID\": \"YT7YT7YT7YT7YT7YT7YT7YT7YT7YT7YT7YT7\",\n      \"api_version\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"openapi_version\": \"<string>\",\n      \"updated_at\": \"<dateTime>\",\n      \"status\": \"consequat\"\n    },\n    {\n      \"ID\": \"eksMoaG4xxveksMoaG4xxveksMoaG4xxveks\",\n      \"api_version\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"openapi_version\": \"<string>\",\n      \"updated_at\": \"<dateTime>\",\n      \"status\": -46982326\n    }\n  ]\n}"
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis/:api_id/oas?page=1&page_size=10&order_by=CreatedAt&sort_desc=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis",
+										":api_id",
+										"oas"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page position."
+										},
+										{
+											"key": "page_size",
+											"value": "10",
+											"description": "Page size."
+										},
+										{
+											"key": "order_by",
+											"value": "CreatedAt",
+											"description": "Order by field."
+										},
+										{
+											"key": "sort_desc",
+											"value": "false",
+											"description": "Is sorting desc."
+										}
+									],
+									"variable": [
+										{
+											"key": "api_id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis/:api_id/oas?page=1&page_size=10&order_by=CreatedAt&sort_desc=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis",
+										":api_id",
+										"oas"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page position."
+										},
+										{
+											"key": "page_size",
+											"value": "10",
+											"description": "Page size."
+										},
+										{
+											"key": "order_by",
+											"value": "CreatedAt",
+											"description": "Order by field."
+										},
+										{
+											"key": "sort_desc",
+											"value": "false",
+											"description": "Is sorting desc."
+										}
+									],
+									"variable": [
+										{
+											"key": "api_id"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis/:api_id/oas?page=1&page_size=10&order_by=CreatedAt&sort_desc=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis",
+										":api_id",
+										"oas"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page position."
+										},
+										{
+											"key": "page_size",
+											"value": "10",
+											"description": "Page size."
+										},
+										{
+											"key": "order_by",
+											"value": "CreatedAt",
+											"description": "Order by field."
+										},
+										{
+											"key": "sort_desc",
+											"value": "false",
+											"description": "Is sorting desc."
+										}
+									],
+									"variable": [
+										{
+											"key": "api_id"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis/:api_id/oas?page=1&page_size=10&order_by=CreatedAt&sort_desc=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis",
+										":api_id",
+										"oas"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page position."
+										},
+										{
+											"key": "page_size",
+											"value": "10",
+											"description": "Page size."
+										},
+										{
+											"key": "order_by",
+											"value": "CreatedAt",
+											"description": "Order by field."
+										},
+										{
+											"key": "sort_desc",
+											"value": "false",
+											"description": "Is sorting desc."
+										}
+									],
+									"variable": [
+										{
+											"key": "api_id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis/:api_id/oas?page=1&page_size=10&order_by=CreatedAt&sort_desc=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis",
+										":api_id",
+										"oas"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page position."
+										},
+										{
+											"key": "page_size",
+											"value": "10",
+											"description": "Page size."
+										},
+										{
+											"key": "order_by",
+											"value": "CreatedAt",
+											"description": "Order by field."
+										},
+										{
+											"key": "sort_desc",
+											"value": "false",
+											"description": "Is sorting desc."
+										}
+									],
+									"variable": [
+										{
+											"key": "api_id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						},
+						{
+							"name": "Service Unavailable",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/apis/:api_id/oas?page=1&page_size=10&order_by=CreatedAt&sort_desc=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"apis",
+										":api_id",
+										"oas"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page position."
+										},
+										{
+											"key": "page_size",
+											"value": "10",
+											"description": "Page size."
+										},
+										{
+											"key": "order_by",
+											"value": "CreatedAt",
+											"description": "Order by field."
+										},
+										{
+											"key": "sort_desc",
+											"value": "false",
+											"description": "Is sorting desc."
+										}
+									],
+									"variable": [
+										{
+											"key": "api_id"
+										}
+									]
+								}
+							},
+							"status": "Service Unavailable",
+							"code": 503,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"errorMessage\": \"<string>\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearerToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://127.0.0.1:8090/v1"
+		},
+		{
+			"key": "api_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "oas_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "policy_id",
+			"value": ""
+		},
+		{
+			"key": "dataset_id",
+			"value": ""
+		}
+	]
+}

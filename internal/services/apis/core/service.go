@@ -32,10 +32,18 @@ func (s *Service) GetApi(ctx context.Context, id uuid.UUID) (*models.Api, error)
 }
 
 func (s *Service) UpdateApi(ctx context.Context, id uuid.UUID, model *models.Api) (*models.Api, error) {
+	if _, err := s.repository.GetApi(ctx, id); err != nil {
+		return nil, err
+	}
+
 	model.ID = id
 	return s.repository.UpsertApi(ctx, model)
 }
 
 func (s *Service) DeleteApi(ctx context.Context, id uuid.UUID) error {
+	if _, err := s.repository.GetApi(ctx, id); err != nil {
+		return err
+	}
+
 	return s.repository.DeleteApi(ctx, id)
 }

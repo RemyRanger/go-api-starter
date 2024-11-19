@@ -13,12 +13,12 @@ import (
 	"github.com/getkin/kin-openapi/openapi3filter"
 	"github.com/getkin/kin-openapi/routers"
 	"github.com/getkin/kin-openapi/routers/gorillamux"
-	"github.com/uptrace/go-clickhouse/ch"
 	"go.opentelemetry.io/otel/trace"
+	"gorm.io/gorm"
 )
 
 // OapiRequestValidatorWithOptions Creates middleware to validate request by openapi specification.
-func OapiRequestValidator(db *ch.DB, cache *bigcache.BigCache, options *openapi3filter.Options) func(next http.Handler) http.Handler {
+func OapiRequestValidator(db *gorm.DB, cache *bigcache.BigCache, options *openapi3filter.Options) func(next http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			span := trace.SpanFromContext(r.Context())
@@ -85,7 +85,7 @@ func validateRequest(r *http.Request, router routers.Router, options *openapi3fi
 			// Split up the verbose error by lines and return the first one
 			// openapi errors seem to be multi-line with a decent message on the first
 			errorLines := strings.Split(e.Error(), "\n")
-			return http.StatusBadRequest, fmt.Errorf(errorLines[0])
+			return http.StatusBadRequest, fmt.Errorf("%s", errorLines[0])
 		/* case *openapi3filter.SecurityRequirementsError:
 		return http.StatusUnauthorized, err */
 		default:
@@ -99,7 +99,7 @@ func validateRequest(r *http.Request, router routers.Router, options *openapi3fi
 }
 
 // fetchOASfromCacheOrDb return corresponding oas file from cache or db
-func fetchOASfromCacheOrDb(ctx context.Context, db *ch.DB, cache *bigcache.BigCache, oasId string) (*openapi3.T, error) {
+func fetchOASfromCacheOrDb(ctx context.Context, db *gorm.DB, cache *bigcache.BigCache, oasId string) (*openapi3.T, error) {
 	// Try to find oas in cache
 	if entry, err := cache.Get(oasId); err == nil {
 		loader := &openapi3.Loader{Context: ctx}
@@ -112,7 +112,7 @@ func fetchOASfromCacheOrDb(ctx context.Context, db *ch.DB, cache *bigcache.BigCa
 	}
 
 	oas := new(models.Oas)
-	if err := db.NewSelect().Model(oas).Where("uuid = ?", oasId).Scan(ctx); err != nil {
+	if err := db.Model(oas).Where("uuid = ?", oasId).Scan(ctx).Error; err != nil {
 		return nil, err
 	}
 

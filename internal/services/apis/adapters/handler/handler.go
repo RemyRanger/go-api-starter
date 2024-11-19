@@ -2,7 +2,7 @@ package handler
 
 import (
 	"encoding/json"
-	"fmt"
+	"errors"
 	"go-api-starter/internal/common/entities"
 	"go-api-starter/internal/common/models"
 	"go-api-starter/internal/common/server"
@@ -12,6 +12,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/jinzhu/copier"
 	"go.opentelemetry.io/otel"
+	"gorm.io/gorm"
 )
 
 const handler_name = "apis-handler"
@@ -114,7 +115,7 @@ func (h *Handler) CreateApi(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	server.RespondWithBody(w, &respBody, http.StatusOK)
+	server.RespondWithBody(w, &respBody, http.StatusCreated)
 }
 
 // Delete API.
@@ -126,6 +127,10 @@ func (h *Handler) DeleteApi(w http.ResponseWriter, r *http.Request, apiId ports.
 
 	// Call service
 	if err := h.service.DeleteApi(ctx, apiId); err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			server.RespondError(w, err, http.StatusNotFound)
+			return
+		}
 		server.RespondError(w, err, http.StatusInternalServerError)
 		return
 	}
@@ -143,11 +148,11 @@ func (h *Handler) GetApi(w http.ResponseWriter, r *http.Request, apiId ports.Id)
 	// Call service
 	modelFound, err := h.service.GetApi(ctx, apiId)
 	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			server.RespondError(w, err, http.StatusNotFound)
+			return
+		}
 		server.RespondError(w, err, http.StatusInternalServerError)
-		return
-	}
-	if modelFound == nil {
-		server.RespondError(w, fmt.Errorf("api not found with id %s", apiId), http.StatusFound)
 		return
 	}
 
@@ -190,6 +195,10 @@ func (h *Handler) UpdateApi(w http.ResponseWriter, r *http.Request, apiId ports.
 	// Call service
 	modelUpdated, err := h.service.UpdateApi(ctx, apiId, &model)
 	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			server.RespondError(w, err, http.StatusNotFound)
+			return
+		}
 		server.RespondError(w, err, http.StatusInternalServerError)
 		return
 	}

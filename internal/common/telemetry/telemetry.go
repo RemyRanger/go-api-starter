@@ -2,7 +2,6 @@ package telemetry
 
 import (
 	"context"
-	"errors"
 	"time"
 
 	"github.com/rs/zerolog/log"
@@ -17,25 +16,8 @@ import (
 
 // setupOTelSDK bootstraps the OpenTelemetry pipeline.
 // If it does not return an error, make sure to call shutdown for proper cleanup.
-func SetupOTelSDK(ctx context.Context, ressourceName string) (shutdown func(context.Context) error, err error) {
-	var shutdownFuncs []func(context.Context) error
-
-	// shutdown calls cleanup functions registered via shutdownFuncs.
-	// The errors from the calls are joined.
-	// Each registered cleanup will be invoked once.
-	shutdown = func(ctx context.Context) error {
-		var err error
-		for _, fn := range shutdownFuncs {
-			err = errors.Join(err, fn(ctx))
-		}
-		shutdownFuncs = nil
-		return err
-	}
-
-	// handleErr calls shutdown for cleanup and makes sure that all errors are returned.
-	handleErr := func(inErr error) {
-		err = errors.Join(inErr, shutdown(ctx))
-	}
+func SetupOTelSDK(ressourceName string) (shutdown func()) {
+	ctx := context.Background()
 
 	// Set up propagator.
 	prop := newPropagator()
@@ -44,13 +26,15 @@ func SetupOTelSDK(ctx context.Context, ressourceName string) (shutdown func(cont
 	// Set up trace provider.
 	tracerProvider, err := newTraceProvider(ressourceName)
 	if err != nil {
-		handleErr(err)
-		return
+		log.Fatal().Err(err).Msg("Error connecting otel-collector")
 	}
-	shutdownFuncs = append(shutdownFuncs, tracerProvider.Shutdown)
 	otel.SetTracerProvider(tracerProvider)
 
-	return
+	shutdown = func() {
+		tracerProvider.Shutdown(ctx)
+	}
+
+	return shutdown
 }
 
 func newPropagator() propagation.TextMapPropagator {
