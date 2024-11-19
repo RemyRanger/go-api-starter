@@ -45,7 +45,7 @@ var _ = BeforeSuite(func() {
 			Level: "DEBUG",
 		},
 	}
-	db, router = control.NewHandlerWithServices(app_name, app_config)
+	db, router = control.NewApp(app_name, app_config)
 })
 
 var _ = AfterSuite(func() {

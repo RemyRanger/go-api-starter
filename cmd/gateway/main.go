@@ -23,7 +23,7 @@ func main() {
 	}
 
 	// Run server
-	_, handler := gateway.NewHandlerWithServices(app_name, app_config)
+	_, handler := gateway.NewApp(app_name, app_config)
 	if err := server.Run(app_name, app_config, handler, otelShutdown); err != nil {
 		log.Fatal().Err(err).Msg("Error starting server")
 	}

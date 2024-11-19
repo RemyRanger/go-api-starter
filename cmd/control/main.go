@@ -23,7 +23,7 @@ func main() {
 	}
 
 	// Run server
-	_, handler := control.NewHandlerWithServices(app_name, app_config)
+	_, handler := control.NewApp(app_name, app_config)
 	if err := server.Run(app_name, app_config, handler, otelShutdown); err != nil {
 		log.Fatal().Err(err).Msg("Error starting server")
 	}

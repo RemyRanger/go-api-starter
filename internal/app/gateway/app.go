@@ -18,7 +18,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func NewHandlerWithServices(app_name string, app_config config.Config) (*gorm.DB, *mux.Router) {
+func NewApp(app_name string, app_config config.Config) (*gorm.DB, *mux.Router) {
 	// Init logger
 	logger.NewZerolog(app_config)
 
