@@ -9,6 +9,7 @@ docker_compose_down:
 # Install all Go dependencies
 install:
 	go mod download
+	go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest
 
 lint_oas:
 	npx -y @redocly/cli@latest lint
