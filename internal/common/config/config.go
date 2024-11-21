@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/go-playground/validator/v10"
@@ -34,7 +33,7 @@ type Logs struct {
 	Level string `mapstructure:"level" validate:"required,oneof=INFO DEBUG TRACE"`
 }
 
-func LoadConfig(configName string) (Config, error) {
+func LoadConfig(configName string) Config {
 	// Set the name of the config file (without extension)
 	viper.SetConfigName(configName)
 	// Set the path to look for the config file
@@ -56,7 +55,7 @@ func LoadConfig(configName string) (Config, error) {
 			log.Warn().Msgf("%s, falling back to environment variables", viper_err.Error())
 		} else {
 			// Handle other errors
-			return Config{}, fmt.Errorf("error reading config file: %w", err)
+			log.Fatal().Err(err).Msg("Error reading config file")
 		}
 	} else {
 		log.Info().Msg("Config file loaded successfully")
@@ -65,15 +64,14 @@ func LoadConfig(configName string) (Config, error) {
 	// Unmarshal the configuration into the struct
 	var config Config
 	if err := viper.Unmarshal(&config); err != nil {
-		return Config{}, fmt.Errorf("unable to decode config: %w", err)
+		log.Fatal().Err(err).Msg("Unable to decode config")
 	}
 
 	// Validate the config
 	validate := validator.New()
 	if err := validate.Struct(config); err != nil {
-		// Return validation errors
-		return Config{}, fmt.Errorf("unable to validate config: %w", err)
+		log.Fatal().Err(err).Msg("Unable to validate config")
 	}
 
-	return config, nil
+	return config
 }

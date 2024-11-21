@@ -20,7 +20,7 @@ var _ = Describe("APIs handler IT", func() {
 	)
 
 	Context("POST /apis", func() {
-		It("should insert a new item into the database", func() {
+		It("OK - should insert a new item into the database", func() {
 			// Prepare the HTTP POST request
 			reqBody := `{
 				"title": "My first API",
@@ -52,7 +52,7 @@ var _ = Describe("APIs handler IT", func() {
 			Expect(model.Title).To(Equal("My first API"))
 		})
 
-		It("should reject wrong json body", func() {
+		It("NOK - should reject wrong json body", func() {
 			// Prepare the HTTP POST request
 			reqBody := `{
 				"title": "My first API",
@@ -81,7 +81,7 @@ var _ = Describe("APIs handler IT", func() {
 			Expect(body.Details).To(BeEmpty())
 		})
 
-		It("should reject wrong body fields format", func() {
+		It("NOK - should reject wrong body fields format", func() {
 			// Prepare the HTTP POST request
 			reqBody := `{
 				"title": "My first API",
@@ -116,7 +116,7 @@ var _ = Describe("APIs handler IT", func() {
 	})
 
 	Context("GET /apis/{id}", func() {
-		It("should fetch api by id", func() {
+		It("OK - should fetch api by id", func() {
 			// Prepare the HTTP GET request
 			req := httptest.NewRequest(http.MethodGet, "/v1/apis/"+apiCreatedID.String(), nil)
 			rec := httptest.NewRecorder()
@@ -133,7 +133,7 @@ var _ = Describe("APIs handler IT", func() {
 			Expect(body.Title).To(Equal("My first API"))
 		})
 
-		It("should reject not found", func() {
+		It("NOK - should reject not found", func() {
 			// Prepare the HTTP GET request
 			req := httptest.NewRequest(http.MethodGet, "/v1/apis/"+uuid.NewString(), nil)
 			rec := httptest.NewRecorder()
@@ -153,7 +153,7 @@ var _ = Describe("APIs handler IT", func() {
 			Expect(body.Details).To(BeEmpty())
 		})
 
-		It("should reject wrong uuid", func() {
+		It("NOK - should reject wrong uuid", func() {
 			// Prepare the HTTP GET request
 			req := httptest.NewRequest(http.MethodGet, "/v1/apis/notuuid", nil)
 			rec := httptest.NewRecorder()
@@ -167,7 +167,7 @@ var _ = Describe("APIs handler IT", func() {
 	})
 
 	Context("PUT /apis/{id}", func() {
-		It("should update item into the database", func() {
+		It("OK - should update item into the database", func() {
 			// Prepare the HTTP POST request
 			reqBody := `{
 				"title": "My Updated API",
@@ -199,7 +199,7 @@ var _ = Describe("APIs handler IT", func() {
 			Expect(model.Title).To(Equal("My Updated API"))
 		})
 
-		It("should reject with not found", func() {
+		It("NOK - should reject with not found", func() {
 			// Prepare the HTTP POST request
 			reqBody := `{
 				"title": "My Updated API",

@@ -13,14 +13,11 @@ const app_name = "gateway"
 const app_config_filename = "gateway-config"
 
 func main() {
-	// Set up OpenTelemetry.
+	// Init openTelemetry.
 	otelShutdown := telemetry.SetupOTelSDK(app_name)
 
 	// Init config
-	app_config, err := config.LoadConfig(app_config_filename)
-	if err != nil {
-		log.Fatal().Err(err).Msg("Error loading config")
-	}
+	app_config := config.LoadConfig(app_config_filename)
 
 	// Run server
 	_, handler := gateway.NewApp(app_name, app_config)
