@@ -1,57 +1,53 @@
 name: CI Pipeline
-"on":
+
+on:
   push:
     branches:
       - main
   pull_request:
     branches:
       - main
+
 jobs:
   build-and-test:
     name: Build and Test
     runs-on: ubuntu-latest
+
     steps:
+      # Vérifier le code source
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Installer Go
       - name: Setup Go
         uses: actions/setup-go@v4
         with:
           go-version: 1.23
 
+      # Installer les dépendances du projet
       - name: Install dependencies
         run: make install
 
+      # Lancer les tests avec couverture
       - name: Run tests with coverage
         run: make test_with_coverage
 
+      # Upload le rapport de couverture
       - name: Upload coverage report
         uses: actions/upload-artifact@v3
         with:
           name: coverage-report
           path: coverage.cov
 
+      # Générer et mettre à jour le badge de couverture dans le README
       - name: Update README with coverage badge
-        run: >
-          # Install goreportcard badge tool (or any badge-generating method)
+        run: |
           go install github.com/gojp/goreportcard/badge@latest
-
-          # Extract total coverage percentage
-          COVERAGE=$(go tool cover -func=coverage.cov | grep total | awk '{print
-          $3}' | sed 's/%//')
-
-          # Generate the badge markdown
+          COVERAGE=$(go tool cover -func=coverage.cov | grep total | awk '{print $3}' | sed 's/%//')
           BADGE="![Coverage](https://img.shields.io/badge/Coverage-${COVERAGE}%25-brightgreen)"
-
-          # Replace the existing coverage badge in the README
           sed -i '/^![Coverage]/c\\'$BADGE README.md
-
-          # Configure Git to commit changes
-          git config --local user.email
-          "github-actions[bot]@users.noreply.github.com"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-
-          # Commit the updated README
           git add README.md
-          git commit -m "Update coverage badge in README" || echo "No changes to
-          commit"
+          git commit -m "Update coverage badge in README" || echo "No changes to commit"
+
