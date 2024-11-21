@@ -4,4 +4,5 @@ content:
     schema:
       $ref: 'ModelError.yaml'
     example:
-      errorMessage: Not Found
+      error: Not Found
+      status: 404

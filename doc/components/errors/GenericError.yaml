@@ -1,7 +1,0 @@
-description: UNKNOWN
-content:
-  application/json:
-    schema:
-      $ref: 'ModelError.yaml'
-    example:
-      errorMessage: Unknown Error.

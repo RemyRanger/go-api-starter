@@ -4,4 +4,5 @@ content:
     schema:
       $ref: 'ModelError.yaml'
     example:
-      errorMessage: Forbidden
+      error: Forbidden
+      status: 403

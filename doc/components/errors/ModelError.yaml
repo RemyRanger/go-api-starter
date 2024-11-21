@@ -1,6 +1,20 @@
-description: A representation of an errorMessage
+description: A representation of an error.
 type: object
 properties:
-  errorMessage:
+  error:
     type: string
-    description: error Message
+    description: Error message
+  status:
+    type: number
+    description: Error status http code.
+  details:
+    type: array
+    items: 
+      type: object
+      properties:
+        field:
+          type: string
+          description: Error on body field.
+        msg:
+          type: string
+          description: Error details message.

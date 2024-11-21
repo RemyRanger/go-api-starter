@@ -4,4 +4,9 @@ content:
     schema:
       $ref: 'ModelError.yaml'
     example:
-      errorMessage: Bad Request
+      error: Bad Request
+      status: 400
+      details:
+        - field: GatewayMode
+          msg: "Field validation failed on the 'oneof' tag"
+

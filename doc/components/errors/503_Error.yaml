@@ -4,4 +4,5 @@ content:
     schema:
       $ref: 'ModelError.yaml'
     example:
-      errorMessage: Service Unavailable
+      error: Service Unavailable
+      status: 503
