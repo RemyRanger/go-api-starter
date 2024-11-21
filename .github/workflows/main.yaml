@@ -38,16 +38,3 @@ jobs:
         with:
           name: coverage-report
           path: coverage.cov
-
-      # Générer et mettre à jour le badge de couverture dans le README
-      - name: Update README with coverage badge
-        run: |
-          go install github.com/gojp/goreportcard/badge@latest
-          COVERAGE=$(go tool cover -func=coverage.cov | grep total | awk '{print $3}' | sed 's/%//')
-          BADGE="![Coverage](https://img.shields.io/badge/Coverage-${COVERAGE}%25-brightgreen)"
-          sed -i '/^![Coverage]/c\\'$BADGE README.md
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add README.md
-          git commit -m "Update coverage badge in README" || echo "No changes to commit"
-
