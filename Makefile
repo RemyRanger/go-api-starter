@@ -12,6 +12,7 @@ install:
 	go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest
 	go install github.com/golang/mock/mockgen@latest
 	go get github.com/golang/mock/mockgen/model
+	go install github.com/onsi/ginkgo/v2/ginkgo
 
 lint_oas:
 	npx -y @redocly/cli@latest lint
