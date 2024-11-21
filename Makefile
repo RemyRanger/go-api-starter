@@ -10,6 +10,7 @@ docker_compose_down:
 install:
 	go mod download
 	go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest
+	go install github.com/golang/mock/mockgen@latest
 
 lint_oas:
 	npx -y @redocly/cli@latest lint
